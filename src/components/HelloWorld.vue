@@ -30,6 +30,7 @@ export default {
       circularMotion:null,
       pointOne: null,
       group: null,
+      text: null,
     }
   },
   methods: {
@@ -87,7 +88,6 @@ export default {
       let headWidth = headLength*.5;
       let arrowHelper = new Three.ArrowHelper( dir, origin, length, hex, headLength, headWidth );
       arrowHelper.line.material.linewidth = 2000;
-      console.log(arrowHelper);
       this.group.add( arrowHelper );
 
       dir = new Three.Vector3( 0, 3.7,2);
@@ -100,7 +100,6 @@ export default {
       headWidth = headLength*.5;
       arrowHelper = new Three.ArrowHelper( dir, origin, length, hex, headLength, headWidth );
       arrowHelper.line.material.linewidth = 2000;
-      console.log(arrowHelper);
       this.group.add( arrowHelper );
 
       // Rotation 90 Degrees in radians = 1.5708
@@ -119,6 +118,34 @@ export default {
       this.controls.autoRotateSpeed = 0.1;
       this.controls.update();
       this.renderer.setClearColor('#000000');
+
+
+
+      let loader = new Three.FontLoader();
+
+      loader.load( './fonts/helvetiker_regular.typeface.json', function ( font ) {
+
+        const text1Geo = new Three.TextGeometry( 'Hello three.js!', {
+          font: font,
+          size: 100,
+          height: 5,
+          curveSegments: 12,
+          bevelEnabled: true,
+          bevelThickness: 10,
+          bevelSize: 8,
+          bevelOffset: 0,
+          bevelSegments: 5
+        });
+        let textMaterial = new Three.MeshBasicMaterial({ color: '#FFFFFF' });
+        let texto = new Three.Mesh(text1Geo , textMaterial);
+        this.text = texto;
+        this.group.add( this.text );
+      });
+
+
+
+
+
 
 
 
