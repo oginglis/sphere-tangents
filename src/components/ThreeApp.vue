@@ -9,14 +9,13 @@ import * as Three from 'three';
 
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
-
 export default {
   title: 'Sphere Tangents',
   name: 'ThreeApp',
   props: {
     exploded: Boolean,
     simulating: Boolean,
-    msg: String
+    
   },
   data() {
     return {
