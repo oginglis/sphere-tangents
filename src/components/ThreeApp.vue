@@ -1,5 +1,6 @@
 <template>
   <div id="container">
+    <h1>{{showDerivations}}</h1>
   </div>
 </template>
 
@@ -15,7 +16,8 @@ export default {
   props: {
     exploded: Boolean,
     simulating: Boolean,
-    
+    showDerivations: Boolean,
+
   },
   data() {
     return {
@@ -175,7 +177,17 @@ export default {
   mounted() {
       this.init();
       this.animate();
-  }
+  },
+  watch: {
+    showDerivations: function(newVal) { // watch it
+      if (newVal == true) {
+        console.log("truuu")
+      } else if (newVal == false) {
+        console.log('falseeee')
+      }
+    },
+  },
+
 }
 
 </script>

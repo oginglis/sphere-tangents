@@ -1,16 +1,30 @@
 <template>
   <div id="app">
-    <ThreeApp msg="Welcome to Your Vue.js App"/>
+    <h1>{{showLabels}}</h1>
+    <Button @toggleSelect="toggleText"></Button>
+    <ThreeApp :showDerivations="showLabels"/>
   </div>
 </template>
 
 <script>
 import ThreeApp from './components/ThreeApp.vue'
+import Button from './components/Button.vue'
 
 export default {
   name: 'App',
   components: {
-    ThreeApp
+    ThreeApp,
+    Button
+  },
+  data() {
+    return {
+      showLabels: false,
+    }
+  },
+  methods: {
+    toggleText: function(){
+      this.showLabels = !this.showLabels
+    }
   }
 }
 </script>
