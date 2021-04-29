@@ -1,6 +1,5 @@
 <template>
   <div id="container">
-    <h1>{{showDerivations}}</h1>
   </div>
 </template>
 
@@ -121,36 +120,6 @@ export default {
       this.renderer.setClearColor('#000000');
 
 
-
-      let loader = new Three.FontLoader();
-
-      loader.load( './fonts/helvetiker_regular.typeface.json', function ( font ) {
-
-        const text1Geo = new Three.TextGeometry( 'Hello three.js!', {
-          font: font,
-          size: 100,
-          height: 5,
-          curveSegments: 12,
-          bevelEnabled: true,
-          bevelThickness: 10,
-          bevelSize: 8,
-          bevelOffset: 0,
-          bevelSegments: 5
-        });
-        let textMaterial = new Three.MeshBasicMaterial({ color: '#FFFFFF' });
-        let texto = new Three.Mesh(text1Geo , textMaterial);
-        this.text = texto;
-        this.group.add( this.text );
-      });
-
-
-
-
-
-
-
-
-
       this.scene.add( this.group );
 
       this.gridHelper = new Three.GridHelper( 50, 50 );
@@ -162,7 +131,8 @@ export default {
     },
     animate: function() {
       requestAnimationFrame(this.animate);
-      this.group.rotation.y +=.009;
+      this.group.rotation.y +=.003;
+
       this.renderer.render(this.scene, this.camera);
     },
     onWindowResize: function () {
@@ -180,10 +150,50 @@ export default {
   },
   watch: {
     showDerivations: function(newVal) { // watch it
+      let self= this;
       if (newVal == true) {
-        console.log("truuu")
+        let loader = new Three.FontLoader();
+
+
+        loader.load( './fonts/helvetiker_regular.typeface.json', function ( font ) {
+          const text1Geo = new Three.TextGeometry( 'B', {
+            font: font,
+            size: .1,
+            height: .01,
+          });
+          let textMaterial = new Three.MeshBasicMaterial({ color: '#FFFFFF' });
+          let texto = new Three.Mesh(text1Geo , textMaterial);
+          texto.name = "B";
+          texto.position.y = 1.5;
+          texto.position.x = 0;
+          texto.position.z = .82;
+          self.text = texto;
+          self.group.add( self.text );
+        });
+
+        loader.load( './fonts/helvetiker_regular.typeface.json', function ( font ) {
+          const text1Geo = new Three.TextGeometry( 'O', {
+            font: font,
+            size: .1,
+            height: .01,
+          });
+          let textMaterial = new Three.MeshBasicMaterial({ color: '#FFFFFF' });
+          let texto = new Three.Mesh(text1Geo , textMaterial);
+          texto.name = "O";
+          texto.position.y = 0;
+          texto.position.x = 0;
+          texto.position.z = 0;
+          self.text = texto;
+          self.group.add( self.text );
+        });
+
       } else if (newVal == false) {
-        console.log('falseeee')
+
+        let selectedObject = self.scene.getObjectByName("B");
+        self.group.remove( selectedObject );
+        selectedObject = self.scene.getObjectByName("O");
+        self.group.remove( selectedObject );
+
       }
     },
   },

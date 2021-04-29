@@ -1,7 +1,6 @@
 <template>
   <div id="app">
-    <h1>{{showLabels}}</h1>
-    <Button @toggleSelect="toggleText"></Button>
+    <Button :showDerivations="showLabels" @toggleSelect="toggleText"></Button>
     <ThreeApp :showDerivations="showLabels"/>
   </div>
 </template>
@@ -24,12 +23,28 @@ export default {
   methods: {
     toggleText: function(){
       this.showLabels = !this.showLabels
-    }
+    },
+    toggleBodyClass(addRemoveClass, className) {
+      const el = document.body;
+
+      if (addRemoveClass === 'addClass') {
+        el.classList.add(className);
+      } else {
+        el.classList.remove(className);
+      }
+    },
+  },
+
+  mounted() {
+    this.toggleBodyClass('addClass', 'bodywork');
+  },
+  destroyed() {
+    this.toggleBodyClass('removeClass', 'bodywork');
   }
 }
 </script>
 
-<style>
+<style >
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -37,5 +52,11 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin: 0 0 0 0;
+},
+
+.bodywork {
+  margin: 0 ;
+  padding: 0;
+
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
-  <div id="button" v-on:click="select">
-    <button class="button">Show Derivations</button>
+  <div class="wrap" v-on:click="select">
+    <button class="button" >{{ showDerivations ?  'Hide Derivations' : 'Show Derivations' }}</button>
   </div>
 </template>
 
@@ -11,7 +11,7 @@ export default {
   title: 'Sphere Tangents',
   name: 'Button',
   props: {
-
+    showDerivations: Boolean,
   },
   methods: {
     select: function(){
@@ -41,8 +41,18 @@ export default {
   font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
-  position: absolute;
-  left: 10;
-  top:10;
+  position: relative;
+  border-radius: 100;
+
+
+}
+
+.wrap {
+position: fixed;
+top:10 !important;
+left: 10 !important;
+display: inline-block;
+
+
 }
 </style>
